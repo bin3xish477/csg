@@ -107,6 +107,10 @@ func makeDB(csgFolder string) {
 
 // addCred will add a credential to the vault
 func addCred(host, app, user, passwd string) {
+	/* Example SQL Query:
+	INSERT INTO vault(host, app , user, passwd)
+	VALUES ("10.11.1.2", "ssh", "developer", "T6xGy%2z<'c>k");
+	*/
 }
 
 // delCred will delete a credential from the vault
