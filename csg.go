@@ -63,10 +63,6 @@ var (
 		yellow, end, yellow, end)
 )
 
-func parseArgs() {
-
-}
-
 func stringInSlice(str string, slice []string) bool {
 	var temp []string
 	for _, s := range slice {
