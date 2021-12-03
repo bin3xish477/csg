@@ -1,6 +1,10 @@
 package cmd
 
 import (
+	"fmt"
+
+	"github.com/bin3xish477/csg/db"
+	"github.com/bin3xish477/csg/utils"
 	"github.com/spf13/cobra"
 )
 
@@ -8,6 +12,10 @@ var addCmd = &cobra.Command{
 	Use:   "add",
 	Short: "add credential to database",
 	Run: func(cmd *cobra.Command, args []string) {
+		db.Connect()
+		db.DB.Create(&cred)
+		fmt.Printf("[%ssuccess%s] added credential to host: %s%s%s\n",
+			utils.Green, utils.End, utils.Blue, cred.Host, utils.End)
 	},
 }
 
@@ -15,7 +23,7 @@ func init() {
 	rootCmd.AddCommand(addCmd)
 
 	addCmd.Flags().StringVarP(
-		&cred.Host, "host", "i", "", "the hostname/IP this credential is associated with",
+		&cred.Host, "host", "i", "", "the hostname/IP this credential is associated with [required]",
 	)
 	addCmd.Flags().StringVarP(
 		&cred.App, "app", "a", "", "the application this credential is associated with",

@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"os"
 
 	"github.com/bin3xish477/csg/cmd"
@@ -9,40 +8,15 @@ import (
 	"github.com/bin3xish477/csg/utils"
 )
 
-const (
-	red    = "\u001b[91m"
-	green  = "\u001b[32m"
-	blue   = "\u001b[94m"
-	yellow = "\u001b[33m"
-	purple = "\u001b[35m"
-	end    = "\u001b[0m"
-	bold   = "\u001b[1m"
-	underL = "\u001b[4m"
-)
-
-// runs before main() and checks to see if vault database
-// has been created, if it hasn't, one will be created
 func init() {
-	homeDir, err := os.UserHomeDir()
-	if err != nil {
-		panic(err)
+	if !utils.FileExists(db.Folder) {
+		os.MkdirAll(db.Folder, 0700)
 	}
-
-	csgFolder := fmt.Sprintf("%s/.csg", homeDir)
-	vault := fmt.Sprintf("%s/vault.db", csgFolder)
-	if !utils.FileExists(csgFolder) {
-		os.MkdirAll(csgFolder, 0700)
-	}
-	if !utils.FileExists(vault) {
-		db.CreateDB(csgFolder, vault)
+	if !utils.FileExists(db.Vault) {
+		db.CreateDB()
 	}
 }
 
 func main() {
 	cmd.Execute()
-	//db, err := sql.Open("sqlite3", vault)
-	//if err != nil {
-	//log.Fatalln("unable to open connection to sqlite db...")
-	//}
-	//defer db.Close()
 }

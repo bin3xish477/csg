@@ -1,34 +1,45 @@
 package db
 
 import (
-	"database/sql"
-	"fmt"
 	"log"
 	"os"
+	"path"
 
-	_ "github.com/mattn/go-sqlite3"
+	"github.com/bin3xish477/csg/models"
+	"gorm.io/driver/sqlite"
+	"gorm.io/gorm"
 )
 
 var (
-	DB *sql.DB
+	hd, _  = os.UserHomeDir()
+	Folder = path.Join(hd, ".csg")
+	Vault  = path.Join(Folder, "vault.db")
+
+	DB *gorm.DB
 )
 
-func CreateDB(csgFolder, vault string) {
-	f, err := os.Create(vault)
+func Connect() {
+	db, err := gorm.Open(sqlite.Open(Vault), &gorm.Config{})
 	if err != nil {
-		log.Printf("unable to create directory in folder: %s", csgFolder)
-	}
-	defer f.Close()
-
-	err = os.Chmod(vault, 0755)
-	if err != nil {
-		panic(err)
+		log.Fatalln("failed to connect to database")
 	}
 
-	stmt := "CREATE TABLE `vault` ( `uid` INTEGER PRIMARY KEY AUTOINCREMENT, `host` VARCHAR(64) NULL, `app` VARCHAR(64) NULL, `user` VARCHAR(64) NULL, `passwd` VARCHAR(64) NULL);"
-	fmt.Printf("executing \n%s\n", stmt)
-	_, err = DB.Exec(stmt)
+	DB = db
+}
+
+func CreateDB() {
+	f, err := os.Create(Vault)
 	if err != nil {
-		log.Fatalln("unable to create database")
+		log.Printf("unable to create file in folder: %s", Folder)
 	}
+	f.Close()
+
+	err = os.Chmod(Vault, 0755)
+	if err != nil {
+		log.Println("couldn't change database permissions...")
+	}
+
+	Connect()
+
+	DB.AutoMigrate(&models.Credential{})
 }

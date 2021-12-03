@@ -1,10 +1,10 @@
 package models
 
 type Credential struct {
-	Host     string
-	App      string
-	User     string
-	Password string
+	Host     string `gorm:"default:nil"`
+	App      string `gorm:"default:nil"`
+	User     string `gorm:"default:nil"`
+	Password string `gorm:"default:nil"`
 }
 
 func (c *Credential) Get() {
