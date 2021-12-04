@@ -27,8 +27,16 @@ Check out my [blog]() on `csg`  for more information.
 
 #### Bash Auto-Completion 
 
+Linux
+
 ```bash
 csg completion bash > /etc/bash_completion.d/csg && source ~/.bashrc
+```
+
+MacOS
+
+```bash
+csg completion bash > /usr/local/etc/bash_completion.d/csg && source ~/.bashrc
 ```
 
 ### Usage Examples
