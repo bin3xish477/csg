@@ -13,7 +13,7 @@ Check out my [blog]() on `csg`  for more information.
   - `go install github.com/bin3xish477/csg`
 2. From Release Page
   ```bash
-  wget 
+  wget https://github.com/bin3xish477/csg/releases/download/v1.0/csg-linux-amd64.tar.gz
   tar zxvf csg-linux-amd64.tar.gz 
   sudo install csg /usr/local/bin/
   ```
