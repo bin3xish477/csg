@@ -47,5 +47,5 @@ csg get -u admin
 csg update --id 1 -u john -a mailcube
 csg delete -i 1
 csg purge -t 10.10.10.1
-
+csg export -f all-creds.csv
 ```
