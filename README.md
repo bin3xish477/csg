@@ -10,7 +10,7 @@ Check out my [blog]() on `csg`  for more information.
 #### Installation (Linux)
 
 1. With Go Installed
-  - `go install github.com/bin3xish477/csg`
+  - `go install github.com/bin3xish477/csg@latest`
 2. From Release Page
   ```bash
   wget https://github.com/bin3xish477/csg/releases/download/v1.0/csg-linux-amd64.tar.gz
