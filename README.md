@@ -3,7 +3,7 @@ csg ("Credential Storage with Go") - a tool to organize the storage of credentia
 
 ![image](https://user-images.githubusercontent.com/44281620/144725235-a6d945b7-f225-49d5-815f-a3ef5921188f.png)
 
-Check out my [blog]() on `csg`  for more information.
+Check out my [blog](https://bin3xish477.medium.com/csg-credential-storage-for-ctf-pentests-e12d48383c8f) on `csg`  for more information.
 
 ### Setup
 
