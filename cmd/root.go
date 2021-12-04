@@ -6,13 +6,12 @@ import (
 )
 
 var (
-	cred    models.Credential
-	verbose bool
+	cred models.Credential
 )
 
 var rootCmd = &cobra.Command{
 	Use:     "csg",
-	Version: "1.0.0",
+	Version: "1.0",
 	Short:   "Store/organize credentials found during a CTF/engagement",
 }
 

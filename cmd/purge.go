@@ -23,16 +23,16 @@ var purgeCmd = &cobra.Command{
 			fmt.Printf("[%sATTENTION%s] you are about to delete all credentials.\n", utils.Red, utils.End)
 			fmt.Printf("[%sconfirm%s] would you like to proceed (y/n): ", utils.Blue, utils.End)
 			fmt.Scanln(&confirm)
-			if strings.Replace(confirm, `\n`, "", -1) == "y" {
-				db.Connect()
-				cred.Purge(db.DB, toPurge)
-
-				fmt.Printf("[%ssuccess%s] purged credentials for host: %s%s%s\n",
-					utils.Green, utils.End, utils.Blue, toPurge, utils.End)
-			} else {
+			if strings.Replace(confirm, `\n`, "", -1) != "y" {
 				fmt.Printf("[%scancelled%s] operation\n", utils.Green, utils.End)
+				return
 			}
 		}
+		db.Connect()
+		cred.Purge(db.DB, toPurge)
+
+		fmt.Printf("[%ssuccess%s] purged credentials for host: %s%s%s\n",
+			utils.Green, utils.End, utils.Blue, toPurge, utils.End)
 	},
 }
 
@@ -40,7 +40,6 @@ func init() {
 	rootCmd.AddCommand(purgeCmd)
 
 	purgeCmd.Flags().StringVarP(
-		&toPurge, "target", "t", "*",
-		fmt.Sprintf("specify a hostname/IP to delete all credentials for \n[%swarning%s] if left blank, all credentials will be purged!!", utils.Red, utils.End),
+		&toPurge, "target", "t", "*", "specify a hostname/IP to delete all credentials for",
 	)
 }

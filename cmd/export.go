@@ -25,6 +25,7 @@ var exportCmd = &cobra.Command{
 		now := time.Now()
 		timeStamp := fmt.Sprintf("%d%02d%02d", now.Year(), now.Month(), now.Day())
 		newFileName := strings.Replace(fileName, ".", fmt.Sprintf("-%s.", timeStamp), -1)
+
 		f, err := os.Create(newFileName)
 		if err != nil {
 			fmt.Printf("[%serror%s] could not create file %s%s%s\n",
@@ -34,6 +35,7 @@ var exportCmd = &cobra.Command{
 		defer f.Close()
 
 		cw := csv.NewWriter(f)
+		defer cw.Flush()
 
 		for _, cred := range creds {
 			err = cw.Write([]string{cred.Host, cred.App, cred.User, cred.Password})
