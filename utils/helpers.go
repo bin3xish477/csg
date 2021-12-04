@@ -34,7 +34,7 @@ func FileExists(filename string) bool {
 
 func PrintTable(c []*models.Credential) {
 	if len(c) == 0 {
-		fmt.Printf("[%s-%s] no credentials matched specified options...\n", Yellow, End)
+		fmt.Printf("[%snote%s] no credentials matched specified options...\n", Yellow, End)
 		return
 	}
 
@@ -46,6 +46,7 @@ func PrintTable(c []*models.Credential) {
 
 	t.AppendHeader(
 		table.Row{
+			fmt.Sprintf("%sID%s", Blue, End),
 			fmt.Sprintf("%sHost%s", Red, End),
 			fmt.Sprintf("%sApp%s", Yellow, End),
 			fmt.Sprintf("%sUser%s", Green, End),
@@ -53,7 +54,7 @@ func PrintTable(c []*models.Credential) {
 		})
 
 	for _, cred := range c {
-		t.AppendRow([]interface{}{cred.Host, cred.App, cred.User, cred.Password})
+		t.AppendRow([]interface{}{cred.ID, cred.Host, cred.App, cred.User, cred.Password})
 	}
 
 	t.Render()

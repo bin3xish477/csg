@@ -12,8 +12,10 @@ var addCmd = &cobra.Command{
 	Use:   "add",
 	Short: "add credential to database",
 	Run: func(cmd *cobra.Command, args []string) {
+
 		db.Connect()
-		db.DB.Create(&cred)
+		cred.Save(db.DB)
+
 		fmt.Printf("[%ssuccess%s] added credential to host: %s%s%s\n",
 			utils.Green, utils.End, utils.Blue, cred.Host, utils.End)
 	},
