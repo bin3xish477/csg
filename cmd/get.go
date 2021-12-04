@@ -10,7 +10,7 @@ import (
 
 var getCmd = &cobra.Command{
 	Use:   "get",
-	Short: "get credential from database",
+	Short: "get credential/s from database",
 	Run: func(cmd *cobra.Command, args []string) {
 
 		if cred.Host == "" && cred.App == "" && cred.User == "" {

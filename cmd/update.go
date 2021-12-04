@@ -19,7 +19,7 @@ var updateCmd = &cobra.Command{
 		}
 
 		if cred.Host == "" && cred.App == "" && cred.User == "" && cred.Password == "" {
-			fmt.Printf("[%serror%s] must specify at least one filter with `-i`, `-a`, `-u`, or `-p` options\n", utils.Red, utils.End)
+			fmt.Printf("[%serror%s] must specify at least one of the following options: `-i`, `-a`, `-u`, or `-p`\n", utils.Red, utils.End)
 			return
 		}
 

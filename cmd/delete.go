@@ -31,6 +31,6 @@ func init() {
 	rootCmd.AddCommand(deleteCmd)
 
 	deleteCmd.Flags().UintVarP(
-		&cred.ID, "id", "i", 0, "the id of the credential to delete [required]",
+		&cred.ID, "id", "i", 0, "the id of the credential to delete [required]\nuse the `get` command to retrieve credential IDs",
 	)
 }

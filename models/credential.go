@@ -12,8 +12,7 @@ type Credential struct {
 	Password string `gorm:"default:nil"`
 }
 
-func (c *Credential) Get(db *gorm.DB) []*Credential {
-	var creds []*Credential
+func (c *Credential) Get(db *gorm.DB) (creds []*Credential) {
 	if c.Host == "*" {
 		db.Find(&creds)
 	} else {
@@ -40,4 +39,9 @@ func (c *Credential) Purge(db *gorm.DB, toPurge string) {
 	} else {
 		db.Where("host like ?", toPurge).Delete(&Credential{})
 	}
+}
+
+func (c *Credential) Export(db *gorm.DB) (creds []*Credential) {
+	db.Find(&creds)
+	return creds
 }
